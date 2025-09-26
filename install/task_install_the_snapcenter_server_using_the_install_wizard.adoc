@@ -1,0 +1,137 @@
+---
+permalink: install/task_install_the_snapcenter_server_using_the_install_wizard.html
+sidebar: sidebar
+keywords: install, snapcenter software, install wizard, features enabled
+summary: 'You can run the SnapCenter Server installer executable to install the SnapCenter Server.'
+---
+= Install the SnapCenter Server on Windows host
+:icons: font
+:imagesdir: ../media/
+
+[.lead]
+You can run the SnapCenter Server installer executable to install the SnapCenter Server.
+
+You can optionally perform several installation and configuration procedures by using PowerShell cmdlets. You should be using PowerShell 7.4.2 or later.
+
+NOTE: Silent installation of the SnapCenter Server from the command-line is not supported.
+
+.Before you begin
+
+* The SnapCenter Server host must be up to date with Windows updates with no pending system restarts.
+* You should have ensured that MySQL Server is not installed on the host where you plan to install the SnapCenter Server.
+* You should have enabled Windows installer debugging.
++
+See the Microsoft web site for information about enabling https://support.microsoft.com/kb/223300[Windows installer logging^].
++
+NOTE: You should not install the SnapCenter Server on a host that has Microsoft Exchange Server, Active Directory, or Domain Name Servers.
+
+.Steps
+
+. Download the SnapCenter Server installation package from https://mysupport.netapp.com/site/products/all/details/snapcenter/downloads-tab[NetApp Support Site^].
+. Initiate the SnapCenter Server installation by double-clicking the downloaded .exe file.
++
+After you initiate the installation, all the prechecks are performed and if the minimum requirements are not met appropriate error or warning messages are displayed.
++
+You can ignore the warning messages and proceed with installation; however, errors should be fixed.
+
+. Review the pre-populated values required for the SnapCenter Server installation and modify if required.
++
+You do not have to specify the password for MySQL Server repository database. During SnapCenter Server installation the password is auto generated.
++
+NOTE: The special character "`%`" is not supported in the custom path for the repository database. If you include "`%`" in the path, installation fails.
+
+. Click *Install Now*.
++
+If you have specified any values that are invalid, appropriate error messages will be displayed. You should reenter the values, and then initiate the installation.
++
+NOTE: If you click the *Cancel* button, the step that is being executed will be completed, and then start the rollback operation. The SnapCenter Server will be completely removed from the host.
+
++
+However, if you click *Cancel* when "SnapCenter Server site restart" or "Waiting for SnapCenter Server to start" operations are being performed, installation will proceed without cancelling the operation.
++
+Log files are always listed (oldest first) in the %temp% folder of the admin user. If you want to redirect the log locations, initiate the SnapCenter Server installation from the command prompt by running:``C:\installer_location\installer_name.exe /log"C:\"``
+
+== Features enabled on Windows host during installation
+
+The SnapCenter Server installer enables the Windows features and roles on your Windows host during installation. These might be of interest for troubleshooting and maintaining the host system.
+
+|===
+| Category| Feature
+
+a|
+Web Server
+a|
+
+* Internet Information Services
+* World Wide Web Services
+* Common HTTP Features
+ ** Default Document
+ ** Directory Browsing
+ ** HTTP Errors
+ ** HTTP Redirection
+ ** Static Content
+ ** WebDAV Publishing
+* Health and Diagnostics
+ ** Custom Logging
+ ** HTTP Logging
+ ** Logging Tools
+ ** Request Monitor
+ ** Tracing
+* Performance Features
+ ** Static Content Compression
+* Security
+ ** IP Security
+ ** Basic Authentication
+ ** Centralized SSL Certificate Support
+ ** Client Certificate Mapping Authentication
+ ** IIS Client Certificate Mapping Authentication
+ ** IP and Domain Restrictions
+ ** Request Filtering
+ ** URL Authorization
+ ** Windows Authentication
+* Application Development Features
+ ** .NET Extensibility 4.5
+ ** Application Initialization
+ ** ASP.NET Core Runtime 8.0.12 (and all subsequent 8.0.x patches) Hosting Bundle
+ ** Server-Side Includes
+ ** WebSocket Protocol
+* Management Tools
+ ** IIS Management Console
+
+a|
+IIS Management Scripts and Tools
+a|
+
+* IIS Management Service
+* Web Management Tools
+
+a|
++.NET Framework 8.0.12 Features+
+a|
+* ASP.NET Core Runtime 8.0.12 (and all subsequent 8.0.x patches) Hosting Bundle
+* Windows Communication Foundation (WCF) HTTP Activation45
+ ** TCP Activation
+ ** HTTP Activation
+
+For .NET specific troubleshooting information, see https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapCenter/SnapCenter_upgrade_or_install_fails_with_%22This_KB_is_not_related_to_the_OS%22[SnapCenter upgrade or install fails for legacy systems that do not have internet connectivity^].
+a|
+Message Queuing
+a|
+
+* Message Queuing Services
++
+NOTE: Ensure that no other applications uses the MSMQ service that SnapCenter creates and manages.
+* RabbitMQ
+* Erlang 
+
+a|
+Windows Process Activation Service
+a|
+
+* Process Model
+
+a|
+Configuration APIs
+a|
+All
+|===
