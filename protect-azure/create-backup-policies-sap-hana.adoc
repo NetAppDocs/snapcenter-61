@@ -1,0 +1,31 @@
+---
+permalink: protect-azure/create-backup-policies-sap-hana.html
+sidebar: sidebar
+keywords: create policies, SAP HANA, backup policies
+summary: 'Create a backup policy for the resource or resource group that you want to back up.'
+---
+
+= Create backup policies for SAP HANA databases
+:icons: font
+:imagesdir: ../media/
+
+[.lead]
+Before you use SnapCenter to back up SAP HANA database resources, you must create a backup policy for the resource or resource group that you want to back up.
+
+.Steps
+
+. In the left navigation pane, click *Settings*.
+. In the Settings page, click *Policies*.
+. Click *New*.
+. In the Name page, enter the policy name and description.
+. In the Policy type page, perform the following steps:
+.. Select *Azure NetApp Files* as the storage type.
+.. Select *File-Based* if you want to perform an integrity check of the database.
+.. Select *Snapshot Based* if you want to create a backup using Snapshot technology.
+. In the Snapshot and backup page, perform the following steps:
+.. Select the frequency of the scheduled backup.
+.. Specify the retention settings.
+.. If you want to enable Azure NetApp Files backup, select *Enable backup* and specify the retention settings.
+. Review the summary and click *Finish*.
+
+
